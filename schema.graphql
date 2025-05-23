@@ -1,0 +1,98 @@
+
+
+type Challenge @entity {
+  id: ID!
+  amount: BigInt!
+  blockNumber: BigInt @index
+  createdAt: DateTime! @index
+  contract: String! @index
+  updatedAt: DateTime! @index
+  igniter: Ember!
+  "Creator"
+  zharrior: Ember!
+  depositCount: BigInt!
+  volume: BigInt!
+  deposits: [Deposit!] @derivedFrom(field: "challenge")
+  status: ChallengeStatus!
+  uri: String
+}
+
+type Deposit @entity {
+  "tokenId + adress"
+  id: ID!
+  challenge: Challenge!
+  blockNumber: BigInt @index
+  createdAt: DateTime! @index
+  stoker: Ember!
+  txHash: String
+  amount: BigInt!
+}
+
+"Basically a user."
+type Ember @entity {
+  "Address"
+  id: ID!
+  name: String
+  metadata: Metadata
+  createdAt: DateTime! @index
+  updatedAt: DateTime!
+  blockNumber: BigInt @index
+  ignited: [Challenge!] @derivedFrom(field: "igniter")
+  assigned: [Challenge!] @derivedFrom(field: "zharrior")
+  stoked: [Deposit!] @derivedFrom(field: "stoker")
+}
+
+type FireXP @entity {
+  id: ID!
+  ember: Ember!
+  blockNumber: BigInt @index
+  createdAt: DateTime! @index
+  updatedAt: DateTime! @index
+  amount: BigInt!
+}
+
+
+enum ChallengeStatus {
+  Active,
+  ProofSubmitted,
+  Completed,
+  Expired,
+  Failed
+}
+
+type Metadata @entity {
+  id: ID!
+  name: String
+  description: String
+  image: String
+  animationUrl: String
+  type: String
+  banner: String
+  externalUrl: String
+}
+
+# type Account @entity {
+#   id: ID!
+#   transfersFrom: [Transfer!] @derivedFrom(field: "from")
+#   transfersTo: [Transfer!] @derivedFrom(field: "to")
+# }
+
+# type Transfer @entity {
+#   id: ID!
+#   blockNumber: Int!
+#   timestamp: DateTime!
+#   txHash: String!
+#   from: Account!
+#   to: Account!
+#   amount: BigInt!
+#   token: Token!
+# }
+
+# type Token @entity {
+#   id: ID!
+#   name: String!
+#   symbol: String!
+#   totalSupply: BigInt!
+#   decimals: Int!
+#   transfers: [Transfer!] @derivedFrom(field: "token")
+# }

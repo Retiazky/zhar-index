@@ -1,0 +1,29 @@
+manifestVersion: subsquid.io/v0.1
+name: crack
+version: 1
+description: 'SubSquid indexer for Zhar Social'
+build: 
+deploy:
+  secrets:
+    - RPC_ENDPOINT
+    - CONTRACT_ADDRESS
+    - CONTRACT_DEPLOYED_AT
+  addons:
+    postgres:
+      config:
+        statement_timeout: 30000
+        log_min_duration_statement: 5000
+  processor:
+    cmd:
+      - sqd
+      - process:prod
+  api:
+    cmd:
+      - sqd
+      - serve:prod
+scale:
+  dedicated: false
+  addons:
+    postgres:
+      storage: 5G
+      profile: small
