@@ -17,12 +17,12 @@ import {
   STARTING_BLOCK,
 } from './environment'
 import { ZHAR } from './mappings/challenge'
+import { TOKEN } from './mappings/firexp'
 
 const archive = getArchiveUrl()
 const chain = getNodeUrl()
 
 export const processor = new EvmBatchProcessor()
-  .setGateway(archive)
   .setRpcEndpoint({
     url: chain,
     rateLimit: 15,
@@ -78,9 +78,18 @@ export const processor = new EvmBatchProcessor()
     topic0: [ZHAR.FAIL],
     transaction: true,
   })
+  .addLog({
+    address: [ENV_CONTRACTS.FIREXP],
+    topic0: [TOKEN.TRANSFER],
+    transaction: true,
+  })
   .setBlockRange({
     from: STARTING_BLOCK,
   })
+
+  if (archive) {
+    processor.setGateway(archive)
+  }
 
 export type Fields = EvmBatchProcessorFields<typeof processor>
 export type Process = DataHandlerContext<Store, Fields>
