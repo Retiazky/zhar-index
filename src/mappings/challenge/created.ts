@@ -58,6 +58,10 @@ export async function handleChallengeCreated(
     zharrior,
     depositCount: 0n,
     volume: 0n,
+    expiration: new Date(event.expiration),
+    disputePeriod: event.disputePeriod,
+    description: event.description,
+    reward: event.reward,
     status: ChallengeStatus.Active,
   })
 
