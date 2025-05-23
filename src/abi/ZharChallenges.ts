@@ -4,7 +4,7 @@ import type { EventParams as EParams, FunctionArguments, FunctionReturn } from '
 
 export const events = {
     ChallengeCompleted: event("0x3ecc666ff01338b0f16250426d0970be81cd025aae938564094a6e1e96786d30", "ChallengeCompleted(uint256,uint256,uint256,uint256)", {"challengeId": indexed(p.uint256), "zharriorReward": p.uint256, "igniterReward": p.uint256, "protocolReward": p.uint256}),
-    ChallengeCreated: event("0xbaa6e4dbec861c736f4ebaa1b7d0d19757de58d21ca7417d3cf2b6e2284794f0", "ChallengeCreated(uint256,address,address)", {"challengeId": indexed(p.uint256), "igniter": indexed(p.address), "forCreator": indexed(p.address)}),
+    ChallengeCreated: event("0xdc8e5155c1f416e66c1e039bb31e38cad0242f7f56b75555f6596de893f83173", "ChallengeCreated(uint256,address,address,uint256,uint256,string,uint256)", {"challengeId": indexed(p.uint256), "igniter": indexed(p.address), "forCreator": indexed(p.address), "expiration": p.uint256, "disputePeriod": p.uint256, "description": p.string, "challengeCreatorReward": p.uint256}),
     ChallengeDepositIncrease: event("0x0468b320dc5e60234d21d68dd98b49440a4de3e02571182f7ce9dd8bf80e4baf", "ChallengeDepositIncrease(uint256,address,uint256)", {"challengeId": indexed(p.uint256), "stoker": indexed(p.address), "amount": p.uint256}),
     ChallengeExpired: event("0x5e804f6ab65f629e96873f89acb6e5d1456139dc56369bcfc528171e348baa42", "ChallengeExpired(uint256)", {"challengeId": indexed(p.uint256)}),
     ChallengeFailed: event("0x10ab5dcdbc065ef28e74deaa88c647c7c94b810c035fb8da57f739d2336eecc2", "ChallengeFailed(uint256,uint256,uint256)", {"challengeId": indexed(p.uint256), "totalDisputeValue": p.uint256, "treasuryValue": p.uint256}),
