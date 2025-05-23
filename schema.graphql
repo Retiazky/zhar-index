@@ -14,6 +14,10 @@ type Challenge @entity {
   volume: BigInt!
   deposits: [Deposit!] @derivedFrom(field: "challenge")
   status: ChallengeStatus!
+  expiration: DateTime! @index
+  disputePeriod: BigInt!
+  description: String
+  reward: BigInt!
   uri: String
 }
 
