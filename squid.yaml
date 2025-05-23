@@ -21,6 +21,11 @@ deploy:
     cmd:
       - sqd
       - serve:prod
+    env:
+      CHAIN: base-sepolia
+      CONTRACT_ADDRESS: 0x00
+      TOKEN_CONTRACT_ADDRESS: 0x00
+      STABLE_COIN_CONTRACT_ADDRESS: 0x00
 scale:
   dedicated: false
   addons:
