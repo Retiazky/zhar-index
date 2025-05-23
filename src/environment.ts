@@ -1,5 +1,5 @@
-export type Chain = 'base'
-export type ChainEnv = 'mainnet'
+export type Chain = 'base' | 'local'
+export type ChainEnv = 'mainnet' | 'sepolia' 
 // | 'testnet'
 type ChainWithEnv = `${Chain}-${ChainEnv}`
 type PossibleChain = ChainWithEnv | `${Chain}-${string}`
@@ -24,6 +24,7 @@ if (!ENV_CONTRACTS.CHALLENGE) {
 const nodes: Record<PossibleChain, string> = {
   'base-mainnet': 'https://mainnet.base.org',
   'base-sepolia': 'https://sepolia.base.org',
+  'local-sepolia': 'http://localhost:8545',
 }
 
 // Setup
@@ -43,5 +44,5 @@ console.table({
   environment: isProd ? 'production' : 'development',
 })
 
-export const getArchiveUrl = (): string => ARCHIVE_URL
+export const getArchiveUrl = (): string => CHAIN.startsWith('local') ? '' : ARCHIVE_URL
 export const getNodeUrl = (): string => NODE_URL
