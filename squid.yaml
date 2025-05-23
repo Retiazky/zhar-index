@@ -4,10 +4,6 @@ version: 1
 description: 'SubSquid indexer for Zhar Social'
 build: 
 deploy:
-  secrets:
-    - RPC_ENDPOINT
-    - CONTRACT_ADDRESS
-    - CONTRACT_DEPLOYED_AT
   addons:
     postgres:
       config:
@@ -17,18 +13,22 @@ deploy:
     cmd:
       - sqd
       - process:prod
+    env:
+      CHAIN: base-sepolia
+      CONTRACT_ADDRESS: '0x5f83c882b6e5e6fb1d8445ac9346100f27b5bab9'
+      TOKEN_CONTRACT_ADDRESS: '0xc9f8f74346bad84f10ee0648d8dedc7b900ec9e8'
+      STARTING_BLOCK: 26126165
   api:
     cmd:
       - sqd
       - serve:prod
     env:
       CHAIN: base-sepolia
-      CONTRACT_ADDRESS: 0x00
-      TOKEN_CONTRACT_ADDRESS: 0x00
-      STABLE_COIN_CONTRACT_ADDRESS: 0x00
+      CONTRACT_ADDRESS: '0x5f83c882b6e5e6fb1d8445ac9346100f27b5bab9'
+      TOKEN_CONTRACT_ADDRESS: '0xc9f8f74346bad84f10ee0648d8dedc7b900ec9e8'
+      STARTING_BLOCK: 26126165
 scale:
   dedicated: false
   addons:
     postgres:
-      storage: 5G
       profile: small

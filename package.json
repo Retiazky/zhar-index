@@ -8,6 +8,8 @@
   },
   "dependencies": {
     "@kodadot1/metasquid": "^0.3.1-rc.0",
+    "@subsquid/evm-abi": "^0.3.1",
+    "@subsquid/evm-codec": "^0.3.0",
     "@subsquid/evm-processor": "^1.27.1",
     "@subsquid/evm-typegen": "^4.4.0",
     "@subsquid/graphql-server": "^4.10.0",
