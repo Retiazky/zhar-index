@@ -27,6 +27,10 @@ export function getChallengeCreatedEvent(ctx: Log) {
     igniter: x.igniter.toLowerCase(),
     forCreator: x.forCreator.toLowerCase(),
     contract,
+    expiration: Number(x.expiration * 1000n),
+    disputePeriod: x.disputePeriod,
+    description: x.description,
+    reward: x.challengeCreatorReward,
   }
 }
 
