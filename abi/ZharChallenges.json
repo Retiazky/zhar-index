@@ -3,12 +3,12 @@
     "type": "constructor",
     "inputs": [
       {
-        "name": "_europToken",
+        "name": "_fireXPToken",
         "type": "address",
         "internalType": "address"
       },
       {
-        "name": "_fireXPToken",
+        "name": "_europToken",
         "type": "address",
         "internalType": "address"
       },
@@ -403,7 +403,7 @@
       {
         "name": "",
         "type": "address",
-        "internalType": "contract IERC20"
+        "internalType": "contract IFireXp"
       }
     ],
     "stateMutability": "view"
@@ -699,6 +699,30 @@
         "type": "address",
         "indexed": true,
         "internalType": "address"
+      },
+      {
+        "name": "expiration",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "disputePeriod",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "indexed": false,
+        "internalType": "string"
+      },
+      {
+        "name": "challengeCreatorReward",
+        "type": "uint256",
+        "indexed": false,
+        "internalType": "uint256"
       }
     ],
     "anonymous": false
