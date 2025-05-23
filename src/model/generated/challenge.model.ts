@@ -54,6 +54,19 @@ export class Challenge {
     @Column_("varchar", {length: 14, nullable: false})
     status!: ChallengeStatus
 
+    @Index_()
+    @DateTimeColumn_({nullable: false})
+    expiration!: Date
+
+    @BigIntColumn_({nullable: false})
+    disputePeriod!: bigint
+
+    @StringColumn_({nullable: true})
+    description!: string | undefined | null
+
+    @BigIntColumn_({nullable: false})
+    reward!: bigint
+
     @StringColumn_({nullable: true})
     uri!: string | undefined | null
 }
