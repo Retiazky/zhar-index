@@ -46,9 +46,10 @@ type Ember @entity {
   stoked: [Deposit!] @derivedFrom(field: "stoker")
 }
 
-type FireXP @entity {
+type Token @entity {
   id: ID!
   ember: Ember!
+  contract: String!
   blockNumber: BigInt @index
   createdAt: DateTime! @index
   updatedAt: DateTime! @index

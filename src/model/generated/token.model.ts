@@ -1,9 +1,9 @@
-import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, BigIntColumn as BigIntColumn_, DateTimeColumn as DateTimeColumn_} from "@subsquid/typeorm-store"
+import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, ManyToOne as ManyToOne_, Index as Index_, StringColumn as StringColumn_, BigIntColumn as BigIntColumn_, DateTimeColumn as DateTimeColumn_} from "@subsquid/typeorm-store"
 import {Ember} from "./ember.model"
 
 @Entity_()
-export class FireXP {
-    constructor(props?: Partial<FireXP>) {
+export class Token {
+    constructor(props?: Partial<Token>) {
         Object.assign(this, props)
     }
 
@@ -13,6 +13,9 @@ export class FireXP {
     @Index_()
     @ManyToOne_(() => Ember, {nullable: true})
     ember!: Ember
+
+    @StringColumn_({nullable: false})
+    contract!: string
 
     @Index_()
     @BigIntColumn_({nullable: true})

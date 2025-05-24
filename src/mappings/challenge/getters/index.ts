@@ -28,6 +28,7 @@ export function getChallengeCreatedEvent(ctx: Log) {
     forCreator: x.forCreator.toLowerCase(),
     contract,
     expiration: Number(x.expiration * 1000n),
+    amount: x.treasury,
     disputePeriod: x.disputePeriod,
     description: x.description,
     reward: x.challengeCreatorReward,

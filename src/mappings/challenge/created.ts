@@ -49,7 +49,7 @@ export async function handleChallengeCreated(
 
   // Create challenge
   const challenge = await getOrCreate(store, Challenge, event.challengeId, {
-    amount: 0n,
+    amount: event.amount,
     blockNumber: BigInt(context.block.height),
     createdAt: new Date(context.block.timestamp),
     updatedAt: new Date(context.block.timestamp),
@@ -57,7 +57,7 @@ export async function handleChallengeCreated(
     igniter,
     zharrior,
     depositCount: 0n,
-    volume: 0n,
+    volume: event.amount,
     expiration: new Date(event.expiration),
     disputePeriod: event.disputePeriod,
     description: event.description,

@@ -17,7 +17,7 @@ import {
   STARTING_BLOCK,
 } from './environment'
 import { ZHAR } from './mappings/challenge'
-import { TOKEN } from './mappings/firexp'
+import { TOKEN } from './mappings/token'
 
 const archive = getArchiveUrl()
 const chain = getNodeUrl()
@@ -79,7 +79,7 @@ export const processor = new EvmBatchProcessor()
     transaction: true,
   })
   .addLog({
-    address: [ENV_CONTRACTS.FIREXP],
+    address: [ENV_CONTRACTS.FIREXP, ENV_CONTRACTS.EUROP],
     topic0: [TOKEN.TRANSFER],
     transaction: true,
   })

@@ -4,7 +4,7 @@ import type { EventParams as EParams, FunctionArguments, FunctionReturn } from '
 
 export const events = {
     ChallengeCompleted: event("0x3ecc666ff01338b0f16250426d0970be81cd025aae938564094a6e1e96786d30", "ChallengeCompleted(uint256,uint256,uint256,uint256)", {"challengeId": indexed(p.uint256), "zharriorReward": p.uint256, "igniterReward": p.uint256, "protocolReward": p.uint256}),
-    ChallengeCreated: event("0xdc8e5155c1f416e66c1e039bb31e38cad0242f7f56b75555f6596de893f83173", "ChallengeCreated(uint256,address,address,uint256,uint256,string,uint256)", {"challengeId": indexed(p.uint256), "igniter": indexed(p.address), "forCreator": indexed(p.address), "expiration": p.uint256, "disputePeriod": p.uint256, "description": p.string, "challengeCreatorReward": p.uint256}),
+    ChallengeCreated: event("0xd34bbebad1bd5a8e3dd0912294bb7c7ce7261ba3d34163b5894872f66a1ed196", "ChallengeCreated(uint256,address,address,uint256,uint256,string,uint256,uint256)", {"challengeId": indexed(p.uint256), "igniter": indexed(p.address), "forCreator": indexed(p.address), "expiration": p.uint256, "disputePeriod": p.uint256, "description": p.string, "challengeCreatorReward": p.uint256, "treasury": p.uint256}),
     ChallengeDepositIncrease: event("0x0468b320dc5e60234d21d68dd98b49440a4de3e02571182f7ce9dd8bf80e4baf", "ChallengeDepositIncrease(uint256,address,uint256)", {"challengeId": indexed(p.uint256), "stoker": indexed(p.address), "amount": p.uint256}),
     ChallengeExpired: event("0x5e804f6ab65f629e96873f89acb6e5d1456139dc56369bcfc528171e348baa42", "ChallengeExpired(uint256)", {"challengeId": indexed(p.uint256)}),
     ChallengeFailed: event("0x10ab5dcdbc065ef28e74deaa88c647c7c94b810c035fb8da57f739d2336eecc2", "ChallengeFailed(uint256,uint256,uint256)", {"challengeId": indexed(p.uint256), "totalDisputeValue": p.uint256, "treasuryValue": p.uint256}),
@@ -28,7 +28,7 @@ export const functions = {
     challenges: viewFun("0x8f1d3776", "challenges(uint256)", {"_0": p.uint256}, {"challengeId": p.uint256, "forCreator": p.address, "igniter": p.address, "description": p.string, "treasury": p.uint256, "createdAt": p.uint256, "expiration": p.uint256, "challengeCreatorReward": p.uint256, "proofUri": p.string, "proofUpdatedAt": p.uint256, "claimedAt": p.uint256, "disputePeriod": p.uint256, "status": p.uint8, "totalDisputeValue": p.uint256}),
     claimRefund: fun("0x5b7baf64", "claimRefund(uint256)", {"_challengeId": p.uint256}, ),
     claimReward: fun("0xae169a50", "claimReward(uint256)", {"_challengeId": p.uint256}, ),
-    createChallenge: fun("0x54de9bef", "createChallenge(address,string,uint256,uint256,uint256)", {"_forCreator": p.address, "_description": p.string, "_expiration": p.uint256, "_challengeCreatorReward": p.uint256, "_disputePeriod": p.uint256}, p.uint256),
+    createChallenge: fun("0x5784a55f", "createChallenge(address,string,uint256,uint256,uint256,uint256)", {"_forCreator": p.address, "_description": p.string, "_expiration": p.uint256, "_challengeCreatorReward": p.uint256, "_disputePeriod": p.uint256, "_initialStake": p.uint256}, p.uint256),
     creators: viewFun("0x933166e1", "creators(address)", {"_0": p.address}, {"creator": p.address, "name": p.string, "metadataUri": p.string, "isActive": p.bool, "totalChallengesCompleted": p.uint256}),
     defiTreasury: viewFun("0x88ecc395", "defiTreasury()", {}, p.address),
     depositToChallenge: fun("0xa9709c19", "depositToChallenge(uint256,uint256)", {"_challengeId": p.uint256, "_amount": p.uint256}, ),

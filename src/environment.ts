@@ -15,6 +15,7 @@ export const FINALITY_CONFIRMATION = Number(
 export const ENV_CONTRACTS = {
   CHALLENGE: process.env.CONTRACT_ADDRESS || '',
   FIREXP: process.env.TOKEN_CONTRACT_ADDRESS || '',
+  EUROP: process.env.EUROP_CONTRACT_ADDRESS || '',
 }
 
 if (!ENV_CONTRACTS.CHALLENGE) {

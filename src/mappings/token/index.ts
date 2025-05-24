@@ -13,9 +13,11 @@ export const TOKEN = {
 }
 
 export async function handler(log: Log, store: Store) {
+  logger.info(`Handling log: ${log.id} with topic ${mainTopic(log)}`)
   switch (mainTopic(log)) {
 
     case TOKEN.TRANSFER:
+      logger.info('Handling transfer event')
       await handleTransfer(log, store).then(() => logger.info('REGISTER OK'))
       return unwrap(log, proc.getTokenTransferEvent)
     default:
