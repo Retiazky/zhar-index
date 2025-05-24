@@ -1,5 +1,5 @@
-module.exports = class Data1748074138031 {
-    name = 'Data1748074138031'
+module.exports = class Data1748085065186 {
+    name = 'Data1748085065186'
 
     async up(db) {
         await db.query(`CREATE TABLE "metadata" ("id" character varying NOT NULL, "name" text, "description" text, "image" text, "animation_url" text, "type" text, "banner" text, "external_url" text, CONSTRAINT "PK_56b22355e89941b9792c04ab176" PRIMARY KEY ("id"))`)
@@ -8,10 +8,16 @@ module.exports = class Data1748074138031 {
         await db.query(`CREATE INDEX "IDX_230a90fc5a10c7ac5ac35397d2" ON "deposit" ("block_number") `)
         await db.query(`CREATE INDEX "IDX_11f6fba4dd0c1e03e2b61b1fd0" ON "deposit" ("created_at") `)
         await db.query(`CREATE INDEX "IDX_19556dd0639faa382851fe2426" ON "deposit" ("stoker_id") `)
-        await db.query(`CREATE TABLE "ember" ("id" character varying NOT NULL, "name" text, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, "block_number" numeric, "metadata_id" character varying, CONSTRAINT "PK_051b9dab40a95d9ba772a77a10d" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE TABLE "token" ("id" character varying NOT NULL, "contract" text NOT NULL, "name" text, "block_number" numeric, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, "amount" numeric NOT NULL, "ember_id" character varying, CONSTRAINT "PK_82fae97f905930df5d62a702fc9" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE INDEX "IDX_c56d4e5943e764ace8d5696b1c" ON "token" ("ember_id") `)
+        await db.query(`CREATE INDEX "IDX_f4973b02efccb2a415fb183be1" ON "token" ("block_number") `)
+        await db.query(`CREATE INDEX "IDX_95d4beb28c1702ce48aa7f55e3" ON "token" ("created_at") `)
+        await db.query(`CREATE INDEX "IDX_a6bb882b22a8299c9861615d14" ON "token" ("updated_at") `)
+        await db.query(`CREATE TABLE "ember" ("id" character varying NOT NULL, "name" text, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, "block_number" numeric, "total_xp" numeric NOT NULL, "metadata_id" character varying, CONSTRAINT "PK_051b9dab40a95d9ba772a77a10d" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_a64c90dc3ab7fd3ead60881bfc" ON "ember" ("metadata_id") `)
         await db.query(`CREATE INDEX "IDX_45e5c0bb6c90e8365108cb974f" ON "ember" ("created_at") `)
         await db.query(`CREATE INDEX "IDX_4686179b3544a4dc16b9757fe3" ON "ember" ("block_number") `)
+        await db.query(`CREATE INDEX "IDX_7f15101b0c1cb99c7dc8b626be" ON "ember" ("total_xp") `)
         await db.query(`CREATE TABLE "challenge" ("id" character varying NOT NULL, "amount" numeric NOT NULL, "block_number" numeric, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "contract" text NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, "deposit_count" numeric NOT NULL, "volume" numeric NOT NULL, "status" character varying(14) NOT NULL, "expiration" TIMESTAMP WITH TIME ZONE NOT NULL, "dispute_period" numeric NOT NULL, "description" text, "reward" numeric NOT NULL, "uri" text, "igniter_id" character varying, "zharrior_id" character varying, CONSTRAINT "PK_5f31455ad09ea6a836a06871b7a" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_7b459d143c353f1265812cb50a" ON "challenge" ("block_number") `)
         await db.query(`CREATE INDEX "IDX_a870a6e360310b6f3a49fd3b07" ON "challenge" ("created_at") `)
@@ -20,17 +26,12 @@ module.exports = class Data1748074138031 {
         await db.query(`CREATE INDEX "IDX_7080bc507d153d8ba469159b7a" ON "challenge" ("igniter_id") `)
         await db.query(`CREATE INDEX "IDX_a2cebd36dbdc62c989f31dff66" ON "challenge" ("zharrior_id") `)
         await db.query(`CREATE INDEX "IDX_efc4a1df7ddb5a325572e4d4ab" ON "challenge" ("expiration") `)
-        await db.query(`CREATE TABLE "token" ("id" character varying NOT NULL, "contract" text NOT NULL, "block_number" numeric, "created_at" TIMESTAMP WITH TIME ZONE NOT NULL, "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL, "amount" numeric NOT NULL, "ember_id" character varying, CONSTRAINT "PK_82fae97f905930df5d62a702fc9" PRIMARY KEY ("id"))`)
-        await db.query(`CREATE INDEX "IDX_c56d4e5943e764ace8d5696b1c" ON "token" ("ember_id") `)
-        await db.query(`CREATE INDEX "IDX_f4973b02efccb2a415fb183be1" ON "token" ("block_number") `)
-        await db.query(`CREATE INDEX "IDX_95d4beb28c1702ce48aa7f55e3" ON "token" ("created_at") `)
-        await db.query(`CREATE INDEX "IDX_a6bb882b22a8299c9861615d14" ON "token" ("updated_at") `)
         await db.query(`ALTER TABLE "deposit" ADD CONSTRAINT "FK_0da4c1c58cdfa4775d9fd035341" FOREIGN KEY ("challenge_id") REFERENCES "challenge"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "deposit" ADD CONSTRAINT "FK_19556dd0639faa382851fe2426c" FOREIGN KEY ("stoker_id") REFERENCES "ember"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
+        await db.query(`ALTER TABLE "token" ADD CONSTRAINT "FK_c56d4e5943e764ace8d5696b1c4" FOREIGN KEY ("ember_id") REFERENCES "ember"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "ember" ADD CONSTRAINT "FK_a64c90dc3ab7fd3ead60881bfc1" FOREIGN KEY ("metadata_id") REFERENCES "metadata"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "challenge" ADD CONSTRAINT "FK_7080bc507d153d8ba469159b7aa" FOREIGN KEY ("igniter_id") REFERENCES "ember"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "challenge" ADD CONSTRAINT "FK_a2cebd36dbdc62c989f31dff668" FOREIGN KEY ("zharrior_id") REFERENCES "ember"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
-        await db.query(`ALTER TABLE "token" ADD CONSTRAINT "FK_c56d4e5943e764ace8d5696b1c4" FOREIGN KEY ("ember_id") REFERENCES "ember"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
     }
 
     async down(db) {
@@ -40,10 +41,16 @@ module.exports = class Data1748074138031 {
         await db.query(`DROP INDEX "public"."IDX_230a90fc5a10c7ac5ac35397d2"`)
         await db.query(`DROP INDEX "public"."IDX_11f6fba4dd0c1e03e2b61b1fd0"`)
         await db.query(`DROP INDEX "public"."IDX_19556dd0639faa382851fe2426"`)
+        await db.query(`DROP TABLE "token"`)
+        await db.query(`DROP INDEX "public"."IDX_c56d4e5943e764ace8d5696b1c"`)
+        await db.query(`DROP INDEX "public"."IDX_f4973b02efccb2a415fb183be1"`)
+        await db.query(`DROP INDEX "public"."IDX_95d4beb28c1702ce48aa7f55e3"`)
+        await db.query(`DROP INDEX "public"."IDX_a6bb882b22a8299c9861615d14"`)
         await db.query(`DROP TABLE "ember"`)
         await db.query(`DROP INDEX "public"."IDX_a64c90dc3ab7fd3ead60881bfc"`)
         await db.query(`DROP INDEX "public"."IDX_45e5c0bb6c90e8365108cb974f"`)
         await db.query(`DROP INDEX "public"."IDX_4686179b3544a4dc16b9757fe3"`)
+        await db.query(`DROP INDEX "public"."IDX_7f15101b0c1cb99c7dc8b626be"`)
         await db.query(`DROP TABLE "challenge"`)
         await db.query(`DROP INDEX "public"."IDX_7b459d143c353f1265812cb50a"`)
         await db.query(`DROP INDEX "public"."IDX_a870a6e360310b6f3a49fd3b07"`)
@@ -52,16 +59,11 @@ module.exports = class Data1748074138031 {
         await db.query(`DROP INDEX "public"."IDX_7080bc507d153d8ba469159b7a"`)
         await db.query(`DROP INDEX "public"."IDX_a2cebd36dbdc62c989f31dff66"`)
         await db.query(`DROP INDEX "public"."IDX_efc4a1df7ddb5a325572e4d4ab"`)
-        await db.query(`DROP TABLE "token"`)
-        await db.query(`DROP INDEX "public"."IDX_c56d4e5943e764ace8d5696b1c"`)
-        await db.query(`DROP INDEX "public"."IDX_f4973b02efccb2a415fb183be1"`)
-        await db.query(`DROP INDEX "public"."IDX_95d4beb28c1702ce48aa7f55e3"`)
-        await db.query(`DROP INDEX "public"."IDX_a6bb882b22a8299c9861615d14"`)
         await db.query(`ALTER TABLE "deposit" DROP CONSTRAINT "FK_0da4c1c58cdfa4775d9fd035341"`)
         await db.query(`ALTER TABLE "deposit" DROP CONSTRAINT "FK_19556dd0639faa382851fe2426c"`)
+        await db.query(`ALTER TABLE "token" DROP CONSTRAINT "FK_c56d4e5943e764ace8d5696b1c4"`)
         await db.query(`ALTER TABLE "ember" DROP CONSTRAINT "FK_a64c90dc3ab7fd3ead60881bfc1"`)
         await db.query(`ALTER TABLE "challenge" DROP CONSTRAINT "FK_7080bc507d153d8ba469159b7aa"`)
         await db.query(`ALTER TABLE "challenge" DROP CONSTRAINT "FK_a2cebd36dbdc62c989f31dff668"`)
-        await db.query(`ALTER TABLE "token" DROP CONSTRAINT "FK_c56d4e5943e764ace8d5696b1c4"`)
     }
 }

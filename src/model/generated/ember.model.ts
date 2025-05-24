@@ -2,6 +2,7 @@ import {Entity as Entity_, Column as Column_, PrimaryColumn as PrimaryColumn_, S
 import {Metadata} from "./metadata.model"
 import {Challenge} from "./challenge.model"
 import {Deposit} from "./deposit.model"
+import {Token} from "./token.model"
 
 /**
  * Basically a user.
@@ -36,6 +37,10 @@ export class Ember {
     @BigIntColumn_({nullable: true})
     blockNumber!: bigint | undefined | null
 
+    @Index_()
+    @BigIntColumn_({nullable: false})
+    totalXp!: bigint
+
     @OneToMany_(() => Challenge, e => e.igniter)
     ignited!: Challenge[]
 
@@ -44,4 +49,7 @@ export class Ember {
 
     @OneToMany_(() => Deposit, e => e.stoker)
     stoked!: Deposit[]
+
+    @OneToMany_(() => Token, e => e.ember)
+    tokens!: Token[]
 }

@@ -29,6 +29,7 @@ export async function handleChallengeCreated(
   let igniter = await get(store, Ember, event.igniter)
   if (!igniter) {
     igniter = create(Ember, event.igniter, {
+      totalXp: 0n,
       createdAt: new Date(context.block.timestamp),
       updatedAt: new Date(context.block.timestamp),
       blockNumber: BigInt(context.block.height),
@@ -40,6 +41,7 @@ export async function handleChallengeCreated(
   let zharrior = await get(store, Ember, event.forCreator)
   if (!zharrior) {
     zharrior = create(Ember, event.forCreator, {
+      totalXp: 0n,
       createdAt: new Date(context.block.timestamp),
       updatedAt: new Date(context.block.timestamp),
       blockNumber: BigInt(context.block.height),

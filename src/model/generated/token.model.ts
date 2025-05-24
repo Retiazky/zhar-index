@@ -17,6 +17,9 @@ export class Token {
     @StringColumn_({nullable: false})
     contract!: string
 
+    @StringColumn_({nullable: true})
+    name!: string | undefined | null
+
     @Index_()
     @BigIntColumn_({nullable: true})
     blockNumber!: bigint | undefined | null

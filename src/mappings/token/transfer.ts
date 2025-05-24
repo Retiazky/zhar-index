@@ -12,6 +12,7 @@ import { unwrap } from '../utils/extract'
 import { Store } from '@subsquid/typeorm-store'
 import md5 from 'md5'
 import { ADDRESS_ZERO } from '../utils/evm'
+import { ENV_CONTRACTS } from '../../environment'
 
 const OPERATION = 'TRANSFER'
 
@@ -38,6 +39,7 @@ export async function handleTransfer(
         createdAt: event.timestamp,
         updatedAt: event.timestamp,
         blockNumber: BigInt(context.block.height),
+        totalXp: 0n,
       })
       await store.save(ember)
     }
@@ -50,6 +52,12 @@ export async function handleTransfer(
       ember: ember,
       amount: 0n,
     })
+    if (event.contract === ENV_CONTRACTS.FIREXP) {
+      ember.totalXp = (ember.totalXp || 0n) - event.amount
+    }
+    else if (event.contract === ENV_CONTRACTS.EUROP) {
+      from.name = 'Europ'
+    }
   }
   if (!to) {
     let ember = await get(store, Ember, event.to)
@@ -58,6 +66,7 @@ export async function handleTransfer(
       createdAt: event.timestamp,
       updatedAt: event.timestamp,
       blockNumber: BigInt(context.block.height),
+      totalXp: 0n,
       })
       await store.save(ember)
     }
@@ -70,7 +79,15 @@ export async function handleTransfer(
       ember: ember,
       amount: 0n,
     })
+    if (event.contract === ENV_CONTRACTS.FIREXP) {
+      ember.totalXp = (ember.totalXp || 0n) + event.amount
+      to.name = 'FireXP'
+    } else if (event.contract === ENV_CONTRACTS.EUROP) {
+      to.name = 'Europ'
+    }
   }
+
+
 
   from.amount = from.amount - event.amount
   to.amount = to.amount + event.amount

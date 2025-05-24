@@ -36,6 +36,7 @@ export async function handleDeposit(
       createdAt: new Date(context.block.timestamp),
       updatedAt: new Date(context.block.timestamp),
       blockNumber: BigInt(context.block.height),
+      totalXp: 0n,
     })
     await store.save(stoker)
   }

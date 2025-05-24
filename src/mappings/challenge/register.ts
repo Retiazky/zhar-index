@@ -44,6 +44,7 @@ export async function handleRegister(
       metadata,
       createdAt: timestamp,
       updatedAt: timestamp,
+      totalXp: 0n,
       blockNumber: BigInt(context.block.height),
     })
   } else {

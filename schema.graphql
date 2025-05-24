@@ -41,15 +41,18 @@ type Ember @entity {
   createdAt: DateTime! @index
   updatedAt: DateTime!
   blockNumber: BigInt @index
+  totalXp: BigInt! @index
   ignited: [Challenge!] @derivedFrom(field: "igniter")
   assigned: [Challenge!] @derivedFrom(field: "zharrior")
   stoked: [Deposit!] @derivedFrom(field: "stoker")
+  tokens: [Token!] @derivedFrom(field: "ember")
 }
 
 type Token @entity {
   id: ID!
   ember: Ember!
   contract: String!
+  name: String
   blockNumber: BigInt @index
   createdAt: DateTime! @index
   updatedAt: DateTime! @index
